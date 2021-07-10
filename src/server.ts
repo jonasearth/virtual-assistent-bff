@@ -1,8 +1,3 @@
-import express from 'express';
+import Server from "./bff-service/server";
 
-const app = express();
-const port = 3333;
-app.get('/', (req, res) => {
-  res.send('The sedulous hyena ate the antelope!');
-});
-app.listen(port);
+new Server();
