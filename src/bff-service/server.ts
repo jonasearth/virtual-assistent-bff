@@ -1,24 +1,21 @@
-import express from "express";
-import logger from "morgan";
+import express, { json } from "express";
+import helmet from "helmet";
 import dotenv from "dotenv";
 import router from "./routes";
 import mongoose from "mongoose";
 
 export default class Server {
-  _express;
   constructor() {
     dotenv.config();
 
-    this._express = express();
-    this._initMiddlewares();
     this._initRoutes();
     this._initMongo();
   }
-  _initMiddlewares() {
-    this._express.use(logger("dev"));
-  }
+
   _initRoutes() {
     const app = express();
+    app.use(helmet());
+    app.use(json());
     const port = 3333;
     app.use("/", router);
     app.listen(port);
